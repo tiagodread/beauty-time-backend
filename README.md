@@ -5,6 +5,7 @@
 
 - mongodb
 - node and npm
+- mailtrap (connected via githubaccount)
 
 ## Install
 
