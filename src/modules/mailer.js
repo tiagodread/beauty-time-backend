@@ -6,7 +6,7 @@ const {host, port, user, pass} = require('../config/mail.json')
 const transport = nodemailer.createTransport({
     host,
     port,
-    auth: { user, pass }
+    auth: {user, pass}
 });
 
 transport.use('compile', hbs({

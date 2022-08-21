@@ -57,10 +57,10 @@ router.post("/authenticate", async (req, res) => {
 });
 
 router.post('/forgot_password', async (req, res) => {
-    const { email } = req.body
+    const {email} = req.body
 
     try {
-        const user = await User.findOne({ email })
+        const user = await User.findOne({email})
         if (!user) {
             return res.status(401).send({error: "Invalid email or password"});
         }
@@ -70,7 +70,7 @@ router.post('/forgot_password', async (req, res) => {
         tokenExpires.setHours(tokenExpires.getHours() + 1);
 
         await User.findByIdAndUpdate(user.id, {
-            '$set':{
+            '$set': {
                 passwordResetToken: token,
                 passwordResetExpires: tokenExpires,
             }
@@ -81,17 +81,17 @@ router.post('/forgot_password', async (req, res) => {
             to: email,
             from: 'tiago.goes@gmail.com',
             template: 'auth/forgot_password',
-            context: { token },
+            context: {token},
         }, (err) => {
             console.log(err)
-            if(err){
+            if (err) {
 
                 return res.status(400).send({error: 'Cannot send forgot password email'})
             }
             res.send()
         })
 
-    }catch (e){
+    } catch (e) {
         console.log(e)
         res.status(400).send({error: 'error on forgot password, try again'})
     }
@@ -100,21 +100,21 @@ router.post('/forgot_password', async (req, res) => {
 });
 
 router.post('/reset_password', async (req, res) => {
-    const { email, token, password } = req.body
+    const {email, token, password} = req.body
 
-    try{
+    try {
         const user = await User.findOne({email}).select("+passwordResetToken passwordResetExpires");
 
-        if(!user){
+        if (!user) {
             return res.status(400).send({error: 'User not found'})
         }
 
-        if(token !== user.passwordResetToken){
+        if (token !== user.passwordResetToken) {
             return res.status(400).send({error: 'Token invalid'})
         }
 
         const now = new Date()
-        if(now > user.passwordResetExpires){
+        if (now > user.passwordResetExpires) {
             return res.status(400).send({error: 'Token expired'})
         }
 
@@ -122,7 +122,7 @@ router.post('/reset_password', async (req, res) => {
         await user.save()
         res.send()
 
-    }catch (e){
+    } catch (e) {
         return res.status(400).send({error: 'Cannot reset password, try again'})
     }
 })
