@@ -5,8 +5,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.locals.layout = false
 
-require("../src/app/controllers/authController")(app);
-require("../src/app/controllers/projectController")(app);
-
+require("../src/app/controllers/index")(app);
 app.listen(3000);
