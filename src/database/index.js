@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://root:root@localhost:27017/admin");
-
+mongoose.connect("mongodb://mongo:27017/backend");
 
 mongoose.Promise = global.Promise;
 
