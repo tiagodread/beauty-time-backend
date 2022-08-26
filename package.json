@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "test": "npx cypress run",
+    "cypress": "npx cypress open",
     "lint": "npx eslint .",
     "lint-fix": "npx eslint --fix"
   },
