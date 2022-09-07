@@ -3,9 +3,9 @@ describe('System health', () => {
     cy.request({
       method: 'GET',
       url: '/health',
-    }).then( ({status, body }) => {
-      expect(status).to.eq(200)
-      expect(body.status).to.eq('OK')
-    })
-  })
-})
+    }).then(({ status, body }) => {
+      expect(status).to.eq(200);
+      expect(body.status).to.eq('OK');
+    });
+  });
+});
