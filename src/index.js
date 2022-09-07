@@ -1,11 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.locals.layout = false
+app.use(bodyParser.urlencoded({ extended: false }));
+app.locals.layout = false;
 
-require("../src/app/controllers/index")(app);
+require('./app/controllers/index')(app);
+
 app.listen(3000);
